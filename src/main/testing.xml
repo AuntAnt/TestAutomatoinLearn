@@ -2,10 +2,10 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name = "All tests">
     <test name = "Test1">
-        <parameter name = "URL" value = "https://www.stratege.ru/"></parameter>
+        <parameter name="URL" value="https://www.stratege.ru/"/>
         <classes>
-            <class name = "SearchInput"></class>
-            <class name = "Wait"></class>
+            <class name="web.SearchInput"/>
+            <class name="web.Wait"/>
         </classes>
     </test>
 </suite>
