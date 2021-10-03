@@ -1,3 +1,4 @@
+import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -40,17 +41,11 @@ public class PossibleTrianglesTest {
 
     @Test
     public void negativeTriangleParameters() {
-        assertThat(rest.getPossibleTriangleWithParameters(-2, 3, 4)
-                .getIsPossible())
-                .describedAs("Проверка НЕсуществования треугольника c отрицательными значениями сторон")
-                .isFalse();
+        rest.getCheckParameters(-2, 3, 4);
     }
 
     @Test
     public void parametersWithZeroParameters() {
-        assertThat(rest.getPossibleTriangleWithParameters(0, 0, 0)
-                .getIsPossible())
-                .describedAs("Проверка треугольника со сторонами равными нулю")
-                .isFalse();
+        rest.getCheckParameters(0, 0, 0);
     }
 }
