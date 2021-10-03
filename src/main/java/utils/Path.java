@@ -1,4 +1,4 @@
-package endpoints;
+package utils;
 
 public enum Path {
     POSSIBLE_TRIANGLE("triangle/possible");

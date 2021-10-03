@@ -1,4 +1,4 @@
-package endpoints;
+package utils;
 
 public enum Endpoints {
     POSSIBLE_TRIANGLE("https://possible-triangle.herokuapp.com/");
