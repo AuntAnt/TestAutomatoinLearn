@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PossibleTrianglesTest {
 
     private final Rest rest = new Rest();
-    private final static String ERROR_MESSAGE = "Not valid date";
+    private final static String ERROR_MESSAGE = "Not valid data";
 
     @Test(description = "Негативный тест на треугольник без параметров")
     public void withoutParameters() {
