@@ -1,5 +1,8 @@
 package utils;
 
+/**
+ * Перечисление для хранения пути к эндпойнту
+ */
 public enum Path {
     POSSIBLE_TRIANGLE("triangle/possible");
 
