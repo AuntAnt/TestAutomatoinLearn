@@ -1,5 +1,8 @@
 package utils;
 
+/**
+ * Перечисление для хранения эндпойнтов
+ */
 public enum Endpoints {
     POSSIBLE_TRIANGLE("https://possible-triangle.herokuapp.com/");
 
