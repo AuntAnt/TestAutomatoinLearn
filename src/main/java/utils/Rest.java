@@ -6,10 +6,10 @@ import pojos.NegativeResponse;
 import pojos.PossibleTriangle;
 import queryparameters.QueryParameters;
 
-
 import static io.restassured.RestAssured.given;
 
 public class Rest {
+
     public RequestSpecification possibleTriangle() {
         return given()
                 .baseUri(Endpoints.POSSIBLE_TRIANGLE.getEndpoint())
