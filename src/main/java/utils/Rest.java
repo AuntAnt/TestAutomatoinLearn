@@ -28,6 +28,8 @@ public class Rest {
         return possibleTriangle()
                 .when().get()
                 .then().statusCode(StatusCodes.OK.getValue())
+                .log()
+                .all()
                 .extract()
                 .as(PossibleTriangle.class);
     }
@@ -36,6 +38,8 @@ public class Rest {
         return setQueryParameters(parameterA, parameterB, parameterC)
                 .when().get()
                 .then().statusCode(StatusCodes.OK.getValue())
+                .log()
+                .all()
                 .extract()
                 .as(PossibleTriangle.class);
     }
@@ -44,6 +48,8 @@ public class Rest {
         return setQueryParameters(parameterA, parameterB, parameterC)
                 .when().get()
                 .then().statusCode(StatusCodes.BAD_REQUEST.getValue())
+                .log()
+                .all()
                 .extract()
                 .as(NegativeResponse.class);
     }
@@ -56,6 +62,8 @@ public class Rest {
                 .queryParam(QueryParameters.TRIANGLE_SIDE_C.getParameter(), parameterC)
                 .when().get()
                 .then().statusCode(StatusCodes.BAD_REQUEST.getValue())
+                .log()
+                .all()
                 .extract()
                 .as(NegativeResponse.class);
     }
