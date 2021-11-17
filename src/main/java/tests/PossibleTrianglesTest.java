@@ -1,6 +1,7 @@
 package tests;
 
 import org.testng.annotations.Test;
+import queryparameters.ParametersType;
 import utils.Rest;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -10,17 +11,18 @@ public class PossibleTrianglesTest {
 
     private final Rest rest = new Rest();
     private final static String ERROR_MESSAGE = "Not valid data";
+    private final static String FUNNY_ERROR_MESSAGE = "You broke everything. Grats.";
 
     @Test(description = "Негативный тест на треугольник без параметров")
     public void withoutParameters() {
-        assertThat(rest.getPossibleTriangleWithoutParameters().getIsPossible())
+        assertThat(rest.getPossibleTrianglePositive().getIsPossible())
                 .describedAs("Проверка треугольника без параметров")
                 .isFalse();
     }
 
     @Test(description = "Проверка равнобедренного треугольника")
     public void isoscelesTriangle() {
-        assertThat(rest.getPossibleTriangleWithValidParameters(3, 3, 5)
+        assertThat(rest.getPossibleTrianglePositive(3, 3, 5) //335
                 .getIsPossible())
                 .describedAs("Проверка равнобедренного треугольника")
                 .isTrue();
@@ -28,7 +30,7 @@ public class PossibleTrianglesTest {
 
     @Test(description = "Проверка равностороннего треугольника")
     public void equilateralTriangle() {
-        assertThat(rest.getPossibleTriangleWithValidParameters(6, 6, 6)
+        assertThat(rest.getPossibleTrianglePositive(6, 6, 6)
                 .getIsPossible())
                 .describedAs("Проверка равностороннего треугольника")
                 .isTrue();
@@ -36,7 +38,7 @@ public class PossibleTrianglesTest {
 
     @Test(description = "Позитивыный тест проверки треугольника")
     public void existingTriangle() {
-        assertThat(rest.getPossibleTriangleWithValidParameters(2, 3, 4)
+        assertThat(rest.getPossibleTrianglePositive(2, 3, 4)
                 .getIsPossible())
                 .describedAs("Проверка существующего треугольника")
                 .isTrue();
@@ -44,7 +46,7 @@ public class PossibleTrianglesTest {
 
     @Test(description = "Проверка отрицательных параметров")
     public void negativeTriangleParameters() {
-        assertThat(rest.getPossibleTriangleWithInvalidParameters(-2, 3, 4)
+        assertThat(rest.getPossibleTriangleNegative(-2, 3, 4)
                 .getMessage()
                 .getError())
                 .describedAs("Проверка сообщения о некорректных параметрах")
@@ -53,7 +55,7 @@ public class PossibleTrianglesTest {
 
     @Test(description = "Проверка параметров равных нулю")
     public void parametersWithZeroParameters() {
-        assertThat(rest.getPossibleTriangleWithInvalidParameters(0, 0, 0)
+        assertThat(rest.getPossibleTriangleNegative(0, 0, 0)
                 .getMessage()
                 .getError())
                 .describedAs("Проверка сообщения о некорректных параметрах")
@@ -62,11 +64,19 @@ public class PossibleTrianglesTest {
 
     @Test(description = "Проверка дробных параметров")
     public void fractionalParameters() {
-        assertThat(rest.getPossibleTriangleWithFractionalParameters(
-                1.1F, 2.22F, 3.333F)
+        assertThat(rest.getPossibleTriangleNegative(1.1F, 2.22F, 3.333F)
                 .getMessage()
                 .getError())
                 .describedAs("Проверка сообщения о некорректных параметрах")
                 .isEqualTo(ERROR_MESSAGE);
+    }
+
+    @Test(description = "Проверка треугольника с четырьмя параметрами")
+    public void withFourParametersTest() {
+        assertThat(rest.getPossibleTriangleNegative(1, 2, 2, 4)
+                .getMessage()
+                .getError())
+                .describedAs("Проверка треугольника с четырьмя параметрами")
+                .isEqualTo(FUNNY_ERROR_MESSAGE);
     }
 }

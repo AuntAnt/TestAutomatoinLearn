@@ -15,4 +15,9 @@ public enum QueryParameters {
     public String getParameter() {
         return parameter;
     }
+
+    @Override
+    public String toString() {
+        return this.getParameter();
+    }
 }
