@@ -3,8 +3,6 @@ package utils;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import pojos.NegativeResponse;
-import pojos.PossibleTriangle;
 import queryparameters.QueryParameters;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -13,6 +11,9 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 
+/**
+ * Класс отправки запроса на проверку треугольника
+ */
 public class Rest {
 
     protected RequestSpecification setBaseUrlAndPath() {
@@ -23,7 +24,8 @@ public class Rest {
                 .log().all();
     }
 
-    public Response getResponse(Object... parameters) {
+    @SafeVarargs
+    public final <T> Response getResponse(T... parameters) {
         return setQueryParameters(parameters)
                 .when().get()
                 .then()
@@ -33,8 +35,8 @@ public class Rest {
                 .response();
     }
 
-    //попробовать улучшить реализацию с мапой
-    protected RequestSpecification setQueryParameters(Object... parameters) {
+    @SafeVarargs
+    protected final <T> RequestSpecification setQueryParameters(T... parameters) {
         List<Object> params = Arrays.asList(parameters);
         QueryParameters[] queryParameters = QueryParameters.values();
         Map<String, Object> paramsValues = new HashMap<>();
@@ -49,15 +51,5 @@ public class Rest {
 
         return setBaseUrlAndPath()
                 .queryParams(paramsValues);
-    }
-
-    public PossibleTriangle getPossibleTrianglePositive(Object... params) {
-        return getResponse(params)
-                .as(PossibleTriangle.class);
-    }
-
-    public NegativeResponse getPossibleTriangleNegative(Object... params) {
-        return getResponse(params)
-                .as(NegativeResponse.class);
     }
 }
